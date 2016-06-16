@@ -1,7 +1,7 @@
 // start slingin' some d3 here.
 
-var width = 750;
-var height = 750;
+var width = 600;
+var height = 600;
 var numEnemies = 50;
 var svgContainer = d3.select("body")
 					.append("svg")
@@ -12,39 +12,39 @@ var svgContainer = d3.select("body")
 					.style('background-color','white');
 
 var minX = 10;
-var maxX= width-10;
+var maxX= width-30;
 var minY = 10;
-var maxY= height-10;
+var maxY= height-30;
 
 
-var dragStart = function(){
-	player.style('fill', 'red'); 
-};
+// var dragStart = function(){
+// 	player.style('fill', 'red'); 
+// };
 
 var drag = function() {
-	player.attr('cx', d3.event.x).attr('cy', d3.event.y); 
-		if (parseFloat(player.attr('cx'))> maxX) {
-			player.attr('cx', maxX);
+	player.attr('x', d3.event.x).attr('y', d3.event.y); 
+		if (parseFloat(player.attr('x'))> maxX) {
+			player.attr('x', maxX);
 		};
-		if (parseFloat(player.attr('cx'))< minX) {
-			player.attr('cx', minX);
+		if (parseFloat(player.attr('x'))< minX) {
+			player.attr('x', minX);
 		};
-		if (parseFloat(player.attr('cy'))> maxY) {
-			player.attr('cy', maxY);
+		if (parseFloat(player.attr('y'))> maxY) {
+			player.attr('y', maxY);
 		};
-		if (parseFloat(player.attr('cy'))< minY) {
-			player.attr('cy', minY);
+		if (parseFloat(player.attr('y'))< minY) {
+			player.attr('y', minY);
 		};
 };
 
-var dragEnd = function() { 
-	player.style('fill', 'orange');
-};
+// var dragEnd = function() { 
+// 	player.style('fill', 'orange');
+// };
 
 var movePlayer = d3.behavior.drag()  
-		.on('dragstart', dragStart)
+		// .on('dragstart', dragStart)
 		.on('drag', drag)
-		.on('dragend', dragEnd)
+		// .on('dragend', dragEnd)
 
 
 var player = svgContainer.append('image')
@@ -82,7 +82,7 @@ var detect_coll = function(){
 			var distance_x = Math.abs(xPos-parseFloat(player.attr('x')));
 			var distance_y = Math.abs(yPos-parseFloat(player.attr('y')));
 			var dist = Math.sqrt(Math.pow(distance_x, 2)+Math.pow(distance_y, 2));
-			if (dist < 10){
+			if (dist < 30){
 				collide = true
 			};
 		};
