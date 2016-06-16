@@ -3,3 +3,210 @@
 /* Note: an asteroid image is included in this repo.
 Feel free to use it if you like. */
 
+body, html{
+	width: 100%;
+  height: 100%;
+  overflow: hidden;
+  cursor: pointer;
+}
+
+body{
+  background: url(http://subtlepatterns.subtlepatterns.netdna-cdn.com/patterns/retina_wood.png) repeat;
+}
+
+#shuriken{
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  margin: -60px 0 0 -60px;
+  width: 120px;
+  height: 120px;
+}
+
+.body{
+  position: absolute;
+  z-index: 2;
+  width: 120px;
+  height: 120px;
+  background: radial-gradient(circle, rgba(146,155,153,0) 0%,rgba(119,125,124,0) 15%,rgba(116,122,121,1) 16%,rgba(125,132,131,1) 19%,rgba(90,96,94,1) 100%);
+  border-radius: 100%;
+  overflow: hidden;
+}
+
+body:active{
+  animation: move 3s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes move
+{
+	0%   {background-position:0% 0%;}
+  5%   {background-position:10% 0%;}
+  100%  {background-position:-200% 0%;}
+}
+
+body:active #shuriken{
+  animation: ninja 3s;
+  animation-iteration-count: infinite;
+}
+
+@keyframes ninja
+{
+	0%   {transform:rotate(0deg);}
+  5%   {transform:rotate(-30deg); left: 43%; top: 63%;}
+  45%   {left: 60%; top: 40%;}
+  100%  {transform:rotate(1800deg); left: 50%; top: 50%;}
+}
+
+.blade {
+  border-style: solid;
+  border-color: transparent transparent rgba(90,96,94,1) transparent;
+  border-width: 0 20px 20px 20px;
+  height: 0;
+  width: 40px;
+  position: absolute;
+}
+.blade:after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -20px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: rgba(90,96,94,1) transparent transparent transparent;
+  border-width: 80px 40px 0 40px;
+}
+
+.bevel{
+	position: absolute;
+	z-index: 3;
+  width: 35px;
+  left: -16px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.bevel div {
+  border-style: solid;
+  border-color: transparent transparent rgba(120,128,125,1) transparent;
+  border-width: 0 20px 20px 20px;
+  height: 0;
+  width: 40px;
+  position: absolute;
+}
+.bevel div:after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -20px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: rgba(120,128,125,1) transparent transparent transparent;
+  border-width: 80px 40px 0 40px;
+}
+
+.bevel2{
+	position: absolute;
+	z-index: 2;
+  width: 38px;
+  left: -19px;
+  height: 100px;
+  overflow: hidden;
+}
+
+.bevel2 div {
+  border-style: solid;
+  border-color: transparent transparent rgba(63,69,66,1) transparent;
+  border-width: 0 20px 20px 20px;
+  height: 0;
+  width: 40px;
+  position: absolute;
+}
+.bevel2 div:after {
+  content: "";
+  position: absolute;
+  top: 20px;
+  left: -20px;
+  width: 0;
+  height: 0;
+  border-style: solid;
+  border-color: rgba(63,69,66,1) transparent transparent transparent;
+  border-width: 80px 40px 0 40px;
+}
+
+.connection{
+  border-top: 40px solid rgba(90,96,94,1);
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  height: 0;
+  width: 33px;
+  position: relative;
+  top: -25px;
+  left: -6px;
+}
+
+.blend{
+  position: absolute;
+  z-index: 3;
+  top: -40px;
+  left: -4px;
+  width: 49px;
+  perspective:180;
+}
+
+.blend div{
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  background: red;
+ background: linear-gradient(to bottom, rgba(90,96,94,0) 0%,rgba(90,96,94,1) 60%,rgba(90,96,94,1) 100%);
+  transform: rotateX(-45deg);
+}
+
+#blade1{
+  top:-35px;
+  left:20px;
+  transform:rotate(180deg);
+}
+
+#blade2{
+  top:50px;
+  left:105px;
+  transform:rotate(270deg);
+}
+
+#blade3{
+  top:135px;
+  left:19px;
+}
+
+#blade4{
+  top:50px;
+  left:-65px;
+  transform:rotate(90deg);
+}
+
+#blend1{
+  top:25px;
+  left:35px;
+  transform:rotate(180deg);
+}
+
+#blend2{
+  top:60px;
+  left:68px;
+  transform:rotate(270deg);
+}
+
+#blend3{
+  top:95px;
+  left:35px;
+}
+
+#blend4{
+  top:60px;
+  left:2px;
+  transform:rotate(90deg);
+}
