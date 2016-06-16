@@ -23,16 +23,16 @@ var player = svgContainer.append('circle')
              					.on('dragstart', function() { player.style('fill', 'red'); })
              					.on('drag', function() {
              					 player.attr('cx', d3.event.x).attr('cy', d3.event.y); 
-             					if (eval(player.attr('cx'))> maxX) {
+             					if (parseFloat(player.attr('cx'))> maxX) {
 									player.attr('cx', maxX)
 								}
-								if (eval(player.attr('cx'))< minX) {
+								if (parseFloat(player.attr('cx'))< minX) {
 									player.attr('cx', minX)
 								}
-								if (eval(player.attr('cy'))> maxY) {
+								if (parseFloat(player.attr('cy'))> maxY) {
 									player.attr('cy', maxY)
 								}
-								if (eval(player.attr('cy'))< minY) {
+								if (parseFloat(player.attr('cy'))< minY) {
 									player.attr('cy', minY)
 								}})
 
@@ -58,16 +58,24 @@ enemy.enter().append('circle').attr('cx', function(d){return d.x}).attr('cy', fu
 var detect_coll = function(){
 	var collide = false;
 	for (var i=0; i<enemy[0].length; i++){
-			var xPos = eval(d3.select(enemy[0][i]).attr('cx'));
-			var yPos = eval(d3.select(enemy[0][i]).attr('cy'));
-			var distance_x = Math.abs(xPos-eval(player.attr('cx')));
-			var distance_y = Math.abs(yPos-eval(player.attr('cy')));
+			var xPos = parseFloat(d3.select(enemy[0][i]).attr('cx'));
+			var yPos = parseFloat(d3.select(enemy[0][i]).attr('cy'));
+			var distance_x = Math.abs(xPos-parseFloat(player.attr('cx')));
+			var distance_y = Math.abs(yPos-parseFloat(player.attr('cy')));
 			var dist = Math.sqrt(Math.pow(distance_x, 2)+Math.pow(distance_y, 2));
 			if (dist < 10){
 				collide = true
 			};
 	};
 	if (collide){
+		var coll = parseFloat(d3.selectAll('.collisions').selectAll('span').text())+1;
+		var highScore = parseFloat(d3.selectAll('.highscore').selectAll('span').text());
+		var current = parseFloat(d3.selectAll('.current').selectAll('span').text());
+
+		if (current > highScore){
+			d3.selectAll('.highscore').selectAll('span').text(current.toString());
+		}
+		d3.selectAll('.collisions').selectAll('span').text(coll.toString());
 		d3.selectAll('.current').selectAll('span').text('0');
 	};
 }
@@ -81,7 +89,7 @@ function move_Enemy(){
 };
 
 function incScore() {
-	var inc=eval(d3.selectAll('.current').selectAll('span').text())	+ 1;
+	var inc=parseFloat(d3.selectAll('.current').selectAll('span').text())	+ 1;
 	d3.selectAll('.current').selectAll('span').text(inc.toString())
 };
 
