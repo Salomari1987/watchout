@@ -1,8 +1,8 @@
 // start slingin' some d3 here.
 var svgContainer = d3.select("body")
 					.append("svg")
-					.attr("width", 500)
-					.attr("height", 500)
+					.attr("width", 1000)
+					.attr("height", 1000)
 					.attr('align', 'center')
 					.style('border', '10px solid')
 					.style('background-color','orange');
@@ -42,14 +42,14 @@ var player = svgContainer.append('image')
 var makeEnemy = function(id){
 	return {
 		id:id,
-		x:Math.random()*500,
-		y:Math.random()*500
+		x:Math.random()*1000,
+		y:Math.random()*1000
 	}
 };
 
 var enemies = [];
 
-for (var i=0; i<20; i++){
+for (var i=0; i<50; i++){
 	enemies.push(makeEnemy(i));
 }
 
@@ -84,8 +84,8 @@ function move_Enemy(){
 	enemy
 	.transition()
 	.duration(1500)
-	.attr('x', function(){return Math.random()*500})
-	.attr('y', function(){return Math.random()*500})
+	.attr('x', function(){return Math.random()*1000})
+	.attr('y', function(){return Math.random()*1000})
 };
 
 function incScore() {
