@@ -47,11 +47,12 @@ var movePlayer = d3.behavior.drag()
 		.on('dragend', dragEnd)
 
 
-var player = svgContainer.append('circle')
-						.attr('cx', width/2)
-						.attr('cy', height/2)
-						.attr('r', 10)
-						.attr('fill', 'orange')
+var player = svgContainer.append('image')
+						.attr('x', width/2)
+						.attr('y', height/2)
+						.attr('xlink:href','Running.gif')
+						.attr('height', 50)
+						.attr('width', 50)
 						.attr('id', 'player')
 						.call(movePlayer)
 						
@@ -71,23 +72,22 @@ for (var i=0; i<numEnemies; i++){
 }
 
 var enemy = svgContainer.selectAll('svg').data(enemies, function(d){return d.id});
-enemy.enter().append('circle').attr('cx', function(d){return d.x}).attr('cy', function(d){return d.y}).attr('r', 10)
 
-
+enemy.enter().append('image').attr('xlink:href','skull.gif').attr('x', function(d){return d.x}).attr('y', function(d){return d.y}).attr('width', 30).attr('height', 30)
 var detect_coll = function(){
 	var collide = false;
 	for (var i=0; i<enemy[0].length; i++){
-		var xPos = parseFloat(d3.select(enemy[0][i]).attr('cx'));
-		var yPos = parseFloat(d3.select(enemy[0][i]).attr('cy'));
-		var distance_x = Math.abs(xPos-parseFloat(player.attr('cx')));
-		var distance_y = Math.abs(yPos-parseFloat(player.attr('cy')));
-		var dist = Math.sqrt(Math.pow(distance_x, 2)+Math.pow(distance_y, 2));
-		if (dist < 10){
-			collide = true
+			var xPos = parseFloat(d3.select(enemy[0][i]).attr('x'));
+			var yPos = parseFloat(d3.select(enemy[0][i]).attr('y'));
+			var distance_x = Math.abs(xPos-parseFloat(player.attr('x')));
+			var distance_y = Math.abs(yPos-parseFloat(player.attr('y')));
+			var dist = Math.sqrt(Math.pow(distance_x, 2)+Math.pow(distance_y, 2));
+			if (dist < 10){
+				collide = true
+			};
 		};
-	};
 	if (collide){
-		// new Audio('Screaming-SoundBible.com-1597978996.mp3').play();
+		new Audio('Screaming-SoundBible.com-1597978996.mp3').play();
 		d3.select('svg').style('background-color','red');
 		setTimeout(function(){d3.select('svg').style('background-color','white')}, 100);
 
@@ -102,13 +102,13 @@ var detect_coll = function(){
 		d3.selectAll('.current').selectAll('span').text('0');
 	};
 }
- 
+
 function move_Enemy(){
 	enemy
 	.transition()
 	.duration(1500)
-	.attr('cx', function(){return Math.random()*width})
-	.attr('cy', function(){return Math.random()*height})
+	.attr('x', function(){return Math.random()*width})
+	.attr('y', function(){return Math.random()*height})
 };
 
 function incScore() {
