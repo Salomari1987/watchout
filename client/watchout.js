@@ -53,21 +53,38 @@ for (var i=0; i<20; i++){
 	enemies.push(makeEnemy(i));
 }
 
-
 var enemy = svgContainer.selectAll('svg').data(enemies, function(d){return d.id});
 enemy.enter().append('circle').attr('cx', function(d){return d.x}).attr('cy', function(d){return d.y}).attr('r', 10)
-
-function callback(){
-	enemy.transition()
+var detect_coll = function(){
+	var collide = false;
+	for (var i=0; i<enemy[0].length; i++){
+			var xPos = eval(d3.select(enemy[0][i]).attr('cx'));
+			var yPos = eval(d3.select(enemy[0][i]).attr('cy'));
+			var distance_x = Math.abs(xPos-eval(player.attr('cx')));
+			var distance_y = Math.abs(yPos-eval(player.attr('cy')));
+			var dist = Math.sqrt(Math.pow(distance_x, 2)+Math.pow(distance_y, 2));
+			if (dist < 10){
+				collide = true
+			};
+	};
+	if (collide){
+		d3.selectAll('.current').selectAll('span').text('0');
+	};
+}
+ 
+function move_Enemy(){
+	enemy
+	.transition()
 	.duration(1500)
 	.attr('cx', function(){return Math.random()*500})
-	.attr('cy', function(){return Math.random()*500});
-}
+	.attr('cy', function(){return Math.random()*500})
+};
 
 function incScore() {
+	var inc=eval(d3.selectAll('.current').selectAll('span').text())	+ 1;
+	d3.selectAll('.current').selectAll('span').text(inc.toString())
+};
 
-var inc=eval(d3.selectAll('.current').selectAll('span').text())	+ 1;
-d3.selectAll('.current').selectAll('span').text(inc.toString())
-}
-setInterval(callback, 1000);
-setInterval(incScore, 1000);
+d3.timer(detect_coll)
+setInterval(move_Enemy, 1000);
+d3.timer(incScore);
